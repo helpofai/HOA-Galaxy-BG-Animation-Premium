@@ -1,0 +1,8 @@
+/* Optional admin styling */
+.wrap .form-table th {
+    width: 250px;
+}
+
+.color-field {
+    width: 80px !important;
+}
