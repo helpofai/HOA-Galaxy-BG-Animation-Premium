@@ -1,1 +1,7 @@
-fix: Correct syntax error
+refactor: Modernize plugin structure and code
+
+- Refactor the plugin to use a modern PHP structure with namespaces and separate class files.
+- Introduce strict typing and type declarations for improved code quality.
+- Separate the view logic from the business logic by moving HTML to template files.
+- Update the main plugin file to load the new structure.
+- Bump the plugin version to 3.0.0.
