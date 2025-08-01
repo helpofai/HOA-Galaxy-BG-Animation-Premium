@@ -374,7 +374,7 @@ class HOA_Galaxy_Background {
         );
     }
     
-    """    public function sanitize_settings($input) {
+    public function sanitize_settings($input) {
         if (!isset($_POST['hoa_galaxy_nonce']) || !wp_verify_nonce($_POST['hoa_galaxy_nonce'], 'hoa_galaxy_settings_nonce')) {
             wp_die('Invalid nonce specified', 'Error');
         }
@@ -414,7 +414,7 @@ class HOA_Galaxy_Background {
         }
         
         return $output;
-    }""
+    }
     
     public function admin_enqueue_scripts($hook) {
         if ('settings_page_hoa-galaxy-settings' !== $hook) {
