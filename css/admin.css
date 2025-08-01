@@ -2,7 +2,7 @@
 
 /* General Layout and Container */
 .hoa-galaxy-settings-wrap {
-    max-width: 960px;
+    max-width: 1200px; /* Increased max-width for three columns */
     margin: 20px auto;
     background: var(--hoa-galaxy-background-color, #f0f0f0);
     padding: 0;
@@ -15,6 +15,23 @@
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
+}
+
+/* Three Column Layout */
+.hoa-galaxy-three-column-layout {
+    display: flex;
+    gap: 20px; /* Space between columns */
+    align-items: flex-start; /* Align items to the top */
+}
+
+.hoa-galaxy-left-sidebar,
+.hoa-galaxy-right-sidebar {
+    flex: 0 0 250px; /* Fixed width for sidebars */
+    max-width: 250px;
+}
+
+.hoa-galaxy-main-content {
+    flex-grow: 1; /* Main content takes remaining space */
 }
 
 .hoa-galaxy-settings-container {
@@ -136,6 +153,18 @@ p.submit .button-primary:focus {
 }
 
 /* Responsive Adjustments */
+@media (max-width: 992px) {
+    .hoa-galaxy-three-column-layout {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .hoa-galaxy-left-sidebar,
+    .hoa-galaxy-right-sidebar {
+        flex: none; /* Remove fixed width */
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 782px) {
     .hoa-galaxy-settings-wrap {
         margin: 10px;

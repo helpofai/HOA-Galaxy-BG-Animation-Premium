@@ -30,10 +30,9 @@ body.hoa-galaxy-admin-theme-dark .hoa-galaxy-settings-wrap {
     background-color: var(--hoa-galaxy-background-color);
 }
 
-body.hoa-galaxy-admin-theme-light .hoa-galaxy-settings-container,
-body.hoa-galaxy-admin-theme-dark .hoa-galaxy-settings-container {
-    background-color: var(--hoa-galaxy-card-background);
-    border: 1px solid var(--hoa-galaxy-border-color);
+body.hoa-galaxy-admin-theme-light .hoa-galaxy-three-column-layout,
+body.hoa-galaxy-admin-theme-dark .hoa-galaxy-three-column-layout {
+    background-color: var(--hoa-galaxy-background-color);
 }
 
 body.hoa-galaxy-admin-theme-light .hoa-galaxy-card,
@@ -49,7 +48,7 @@ body.hoa-galaxy-admin-theme-dark .hoa-galaxy-card-title {
 }
 
 body.hoa-galaxy-admin-theme-light .form-table th,
-body.hoa-galaxy-admin-theme-dark .form-table th {
+body.hoa-galaxy-admin-theme-dark .form-galaxy-table th {
     color: var(--hoa-galaxy-text-color);
 }
 
