@@ -6,7 +6,7 @@ namespace HOA\Galaxy;
 
 class HOA_Galaxy_Updater {
     private string $file;
-    private array $plugin;
+    private ?array $plugin = null;
     private string $basename;
     private bool $active;
     private string $username;
@@ -16,13 +16,21 @@ class HOA_Galaxy_Updater {
 
     public function __construct(string $file) {
         $this->file = $file;
-        add_action('admin_init', [$this, 'set_plugin_properties']);
+        $this->set_plugin_properties();
     }
 
     public function set_plugin_properties(): void {
-        $this->plugin = get_plugin_data($this->file);
-        $this->basename = plugin_basename($this->file);
-        $this->active = is_plugin_active($this->basename);
+        $plugin_data = get_plugin_data($this->file);
+        if (is_array($plugin_data)) {
+            $this->plugin = $plugin_data;
+            $this->basename = plugin_basename($this->file);
+            $this->active = is_plugin_active($this->basename);
+        } else {
+            // Handle case where plugin data is not an array (e.g., plugin not fully loaded yet)
+            $this->plugin = []; // Initialize as empty array to prevent further errors
+            $this->basename = plugin_basename($this->file);
+            $this->active = false;
+        }
     }
 
     public function set_username(string $username): void {
@@ -67,6 +75,7 @@ class HOA_Galaxy_Updater {
     }
 
     public function modify_transient($transient) {
+        $this->set_plugin_properties(); // Ensure properties are set
         if (property_exists($transient, 'checked') && $transient->checked) {
             $this->get_repository_info();
 

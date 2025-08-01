@@ -207,8 +207,8 @@ class HOA_Galaxy_Background {
             return;
         }
         wp_enqueue_style('wp-color-picker');
-        wp_enqueue_script('hoa-galaxy-admin', plugin_dir_url(__DIR__) . 'js/admin.js', ['wp-color-picker'], '2.0.3', true);
-        wp_enqueue_style('hoa-galaxy-admin-theme', plugin_dir_url(__DIR__) . 'css/admin-theme.css', [], '2.0.3');
+        wp_enqueue_script('hoa-galaxy-admin', plugin_dir_url(__DIR__) . 'js/admin.js', ['wp-color-picker'], '3.0.5', true);
+        wp_enqueue_style('hoa-galaxy-admin-theme', plugin_dir_url(__DIR__) . 'css/admin-theme.css', [], '3.0.5');
     }
 
     public function add_admin_body_class(string $classes): string {

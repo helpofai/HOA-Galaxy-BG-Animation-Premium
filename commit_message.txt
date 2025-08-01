@@ -1,4 +1,0 @@
-docs: Update README with comprehensive changelog
-
-- Added detailed changelog entries for versions 3.0.1 and 2.0.3.
-- Included information about new features, bug fixes, and code improvements.

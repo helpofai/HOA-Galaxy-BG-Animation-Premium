@@ -7,13 +7,25 @@
             settings_fields('hoa_galaxy_settings');
             wp_nonce_field('hoa_galaxy_settings_nonce', 'hoa_galaxy_nonce');
             
-            // General Settings Section
-            echo '<div class="hoa-galaxy-card">';
-            echo '<h2 class="hoa-galaxy-card-title">' . esc_html__('General Settings', 'hoa-galaxy') . '</h2>';
-            echo '<table class="form-table">';
-            do_settings_sections('hoa-galaxy-settings'); // This will render all sections
-            echo '</table>';
-            echo '</div>';
+            global $wp_settings_sections;
+
+            $page = 'hoa-galaxy-settings';
+
+            if (isset($wp_settings_sections[$page])) {
+                foreach ((array) $wp_settings_sections[$page] as $section) {
+                    echo '<div class="hoa-galaxy-card">';
+                    if ($section['title']) {
+                        echo "<h2 class=\"hoa-galaxy-card-title\">{$section['title']}</h2>";
+                    }
+                    if ($section['callback']) {
+                        call_user_func($section['callback'], $section);
+                    }
+                    echo '<table class="form-table">';
+                    do_settings_fields($page, $section['id']);
+                    echo '</table>';
+                    echo '</div>';
+                }
+            }
 
             submit_button();
             ?>
