@@ -117,6 +117,26 @@
     text-align: center;
 }
 
+/* Multi-Color Picker Styling */
+.hoa-galaxy-multi-color-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.hoa-galaxy-color-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.hoa-galaxy-multi-color-picker .button {
+    height: 30px; /* Adjust button height to match input */
+    line-height: 28px;
+    padding: 0 10px;
+}
+
 /* Checkbox Styling */
 .hoa-galaxy-card input[type="checkbox"] {
     width: auto;

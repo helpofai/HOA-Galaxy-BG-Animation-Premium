@@ -33,11 +33,11 @@ class HOA_Galaxy_Background {
             'star_count' => 150,
             'star_size_min' => 1,
             'star_size_max' => 3,
-            'star_colors' => '#ffffff,#ffd700,#87ceeb,#ffa07a,#98fb98,#dda0dd,#ff6347',
+            'star_colors' => ['#ffffff','#ffd700','#87ceeb','#ffa07a','#98fb98','#dda0dd','#ff6347'],
             'star_opacity' => 0.8,
             'shooting_count' => 10,
             'shooting_size' => 2,
-            'shooting_colors' => '#ffffff,#64f0ff,#ff5e5e',
+            'shooting_colors' => ['#ffffff','#64f0ff','#ff5e5e'],
             'z_index' => -100,
             'disable_on_mobile' => false,
             'admin_theme' => 'system', // New setting for admin theme
@@ -129,11 +129,11 @@ class HOA_Galaxy_Background {
             'star_count' => ['Number of Stars', 'number', 'hoa_galaxy_stars', ['min' => 10, 'max' => 500, 'step' => 10]],
             'star_size_min' => ['Min Star Size (px)', 'number', 'hoa_galaxy_stars', ['min' => 0.5, 'max' => 5, 'step' => 0.1]],
             'star_size_max' => ['Max Star Size (px)', 'number', 'hoa_galaxy_stars', ['min' => 1, 'max' => 10, 'step' => 0.1]],
-            'star_colors' => ['Star Colors (comma separated)', 'text', 'hoa_galaxy_stars', ['class' => 'color-field']],
+            'star_colors' => ['Star Colors', 'multi_color', 'hoa_galaxy_stars', []],
             'star_opacity' => ['Star Opacity', 'number', 'hoa_galaxy_stars', ['min' => 0.1, 'max' => 1, 'step' => 0.1]],
             'shooting_count' => ['Number of Shooting Stars', 'number', 'hoa_galaxy_shooting', ['min' => 0, 'max' => 30, 'step' => 1]],
             'shooting_size' => ['Shooting Star Size (px)', 'number', 'hoa_galaxy_shooting', ['min' => 1, 'max' => 5, 'step' => 0.5]],
-            'shooting_colors' => ['Shooting Star Colors (comma separated)', 'text', 'hoa_galaxy_shooting', ['class' => 'color-field']],
+            'shooting_colors' => ['Shooting Star Colors', 'multi_color', 'hoa_galaxy_shooting', []],
             'z_index' => ['Z-Index', 'number', 'hoa_galaxy_general', ['min' => -999, 'max' => 0, 'step' => 1]],
             'disable_on_mobile' => ['Disable on Mobile', 'checkbox', 'hoa_galaxy_general', []],
             'admin_theme' => ['Admin Panel Theme', 'select', 'hoa_galaxy_general', ['options' => ['system' => 'System Default', 'light' => 'Light Mode', 'dark' => 'Dark Mode']]],
@@ -197,6 +197,30 @@ class HOA_Galaxy_Background {
             }, array_keys($args['options']), $args['options']))
         );
     }
+
+    public function multi_color_callback(array $args): void {
+        $colors = $this->settings[$args['name']] ?? [];
+        if (!is_array($colors)) {
+            $colors = explode(',', $colors); // Handle old comma-separated format
+        }
+        $colors = array_filter(array_map('trim', $colors));
+
+        echo '<div class="hoa-galaxy-multi-color-picker" id="' . esc_attr($args['name']) . '_colors">';
+        foreach ($colors as $index => $color) {
+            printf(
+                '<div class="hoa-galaxy-color-item"><input type="text" name="hoa_galaxy_settings[%1$s][%2$s]" value="%3$s" class="color-field" /><button type="button" class="button remove-color">-</button></div>',
+                esc_attr($args['name']),
+                esc_attr((string) $index),
+                esc_attr($color)
+            );
+        }
+        printf(
+            '<button type="button" class="button add-color" data-field-name="%1$s">%2$s</button>',
+            esc_attr($args['name']),
+            __('Add Color', 'hoa-galaxy')
+        );
+        echo '</div>';
+    }
     
     public function sanitize_settings(array $input): array {
         if (empty($_POST['hoa_galaxy_nonce']) || !wp_verify_nonce(sanitize_key($_POST['hoa_galaxy_nonce']), 'hoa_galaxy_settings_nonce')) {
@@ -224,9 +248,15 @@ class HOA_Galaxy_Background {
                     break;
                 case 'star_colors':
                 case 'shooting_colors':
-                    $output[$key] = implode(',', array_filter(array_map('trim', explode(',', sanitize_text_field($value))), function ($color) {
-                        return preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color);
-                    }));
+                    $sanitized_colors = [];
+                    if (is_array($value)) {
+                        foreach ($value as $color) {
+                            if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
+                                $sanitized_colors[] = sanitize_hex_color($color);
+                            }
+                        }
+                    }
+                    $output[$key] = $sanitized_colors;
                     break;
                 case 'disable_on_mobile':
                     $output[$key] = (bool) $value;
