@@ -1,0 +1,60 @@
+/* Admin Theme Styles */
+
+body.hoa-galaxy-admin-theme-light {
+    /* Light mode styles */
+    --hoa-galaxy-text-color: #333;
+    --hoa-galaxy-background-color: #f0f0f0;
+    --hoa-galaxy-card-background: #fff;
+    --hoa-galaxy-border-color: #ddd;
+}
+
+body.hoa-galaxy-admin-theme-dark {
+    /* Dark mode styles */
+    --hoa-galaxy-text-color: #f0f0f0;
+    --hoa-galaxy-background-color: #333;
+    --hoa-galaxy-card-background: #444;
+    --hoa-galaxy-border-color: #555;
+}
+
+/* Apply variables to common elements */
+body.hoa-galaxy-admin-theme-light,
+body.hoa-galaxy-admin-theme-dark {
+    color: var(--hoa-galaxy-text-color);
+    background-color: var(--hoa-galaxy-background-color);
+}
+
+body.hoa-galaxy-admin-theme-light .wrap,
+body.hoa-galaxy-admin-theme-dark .wrap {
+    background-color: var(--hoa-galaxy-card-background);
+    border: 1px solid var(--hoa-galaxy-border-color);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+body.hoa-galaxy-admin-theme-light .form-table th,
+body.hoa-galaxy-admin-theme-dark .form-table th {
+    color: var(--hoa-galaxy-text-color);
+}
+
+body.hoa-galaxy-admin-theme-light input[type="text"],
+body.hoa-galaxy-admin-theme-light input[type="number"],
+body.hoa-galaxy-admin-theme-light select,
+body.hoa-galaxy-admin-theme-dark input[type="text"],
+body.hoa-galaxy-admin-theme-dark input[type="number"],
+body.hoa-galaxy-admin-theme-dark select {
+    background-color: var(--hoa-galaxy-card-background);
+    color: var(--hoa-galaxy-text-color);
+    border: 1px solid var(--hoa-galaxy-border-color);
+}
+
+body.hoa-galaxy-admin-theme-light .wp-picker-container input.wp-color-picker,
+body.hoa-galaxy-admin-theme-dark .wp-picker-container input.wp-color-picker {
+    background-color: var(--hoa-galaxy-card-background);
+    color: var(--hoa-galaxy-text-color);
+    border: 1px solid var(--hoa-galaxy-border-color);
+}
+
+/* System Default (no specific styles, relies on WordPress default) */
+body.hoa-galaxy-admin-theme-system {
+    /* No specific styles, relies on WordPress default admin styles */
+}

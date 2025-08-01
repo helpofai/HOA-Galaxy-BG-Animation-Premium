@@ -1,5 +1,6 @@
-fix(admin): Remove duplicate admin menu item
+feat(admin): Add light/dark mode to admin panel
 
-- The "Galaxy Background" settings menu was appearing twice in the admin panel.
-- This was caused by a redundant `is_admin()` check in the `HOA_Galaxy_Background` class constructor. The constructor was already being called within an `is_admin()` block in the main plugin file.
-- Removing the unnecessary conditional from the constructor resolves the duplication.
+- Implemented a new "Admin Panel Theme" setting (Light, Dark, System Default).
+- Added logic to apply theme classes to the admin body.
+- Created `css/admin-theme.css` for theme-specific styles.
+- Updated `js/admin.js` to handle dynamic theme switching.

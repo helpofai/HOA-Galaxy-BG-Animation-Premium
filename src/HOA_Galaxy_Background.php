@@ -23,6 +23,7 @@ class HOA_Galaxy_Background {
         add_action('admin_menu', [$this, 'add_admin_menu']);
         add_action('admin_init', [$this, 'settings_init']);
         add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
+        add_filter('admin_body_class', [$this, 'add_admin_body_class']);
     }
 
     private function get_default_settings(): array {
@@ -37,6 +38,7 @@ class HOA_Galaxy_Background {
             'shooting_colors' => '#ffffff,#64f0ff,#ff5e5e',
             'z_index' => -100,
             'disable_on_mobile' => false,
+            'admin_theme' => 'system', // New setting for admin theme
         ];
     }
 
@@ -98,6 +100,7 @@ class HOA_Galaxy_Background {
             'shooting_colors' => ['Shooting Star Colors (comma separated)', 'text', 'hoa_galaxy_shooting', ['class' => 'color-field']],
             'z_index' => ['Z-Index', 'number', 'hoa_galaxy_general', ['min' => -999, 'max' => 0, 'step' => 1]],
             'disable_on_mobile' => ['Disable on Mobile', 'checkbox', 'hoa_galaxy_general', []],
+            'admin_theme' => ['Admin Panel Theme', 'select', 'hoa_galaxy_general', ['options' => ['system' => 'System Default', 'light' => 'Light Mode', 'dark' => 'Dark Mode']]],
         ];
 
         foreach ($fields as $name => $field) {
@@ -145,6 +148,17 @@ class HOA_Galaxy_Background {
             checked($checked, true, false)
         );
     }
+
+    public function select_callback(array $args): void {
+        $value = $this->settings[$args['name']] ?? '';
+        printf(
+            '<select id="%1$s" name="hoa_galaxy_settings[%1$s]">%2$s</select>',
+            esc_attr($args['name']),
+            implode('', array_map(function ($key, $label) use ($value) {
+                return sprintf('<option value="%s" %s>%s</option>', esc_attr($key), selected($value, $key, false), esc_html($label));
+            }, array_keys($args['options']), $args['options']))
+        );
+    }
     
     public function sanitize_settings(array $input): array {
         if (empty($_POST['hoa_galaxy_nonce']) || !wp_verify_nonce(sanitize_key($_POST['hoa_galaxy_nonce']), 'hoa_galaxy_settings_nonce')) {
@@ -179,6 +193,9 @@ class HOA_Galaxy_Background {
                 case 'disable_on_mobile':
                     $output[$key] = (bool) $value;
                     break;
+                case 'admin_theme':
+                    $output[$key] = sanitize_key($value);
+                    break;
             }
         }
         
@@ -191,5 +208,11 @@ class HOA_Galaxy_Background {
         }
         wp_enqueue_style('wp-color-picker');
         wp_enqueue_script('hoa-galaxy-admin', plugin_dir_url(__DIR__) . 'js/admin.js', ['wp-color-picker'], '2.0.3', true);
+        wp_enqueue_style('hoa-galaxy-admin-theme', plugin_dir_url(__DIR__) . 'css/admin-theme.css', [], '2.0.3');
+    }
+
+    public function add_admin_body_class(string $classes): string {
+        $theme = $this->settings['admin_theme'] ?? 'system';
+        return "$classes hoa-galaxy-admin-theme-$theme";
     }
 }
