@@ -26,8 +26,8 @@
 
 .hoa-galaxy-left-sidebar,
 .hoa-galaxy-right-sidebar {
-    flex: 0 0 250px; /* Fixed width for sidebars */
-    max-width: 250px;
+    flex: 0 0 20%; /* Flexible width for sidebars, e.g., 20% */
+    max-width: 250px; /* Optional: Keep a max-width if desired */
 }
 
 .hoa-galaxy-main-content {
