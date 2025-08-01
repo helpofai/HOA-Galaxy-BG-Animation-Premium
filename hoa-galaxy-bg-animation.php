@@ -208,6 +208,7 @@ class HOA_Galaxy_Background {
             <form method="post" action="options.php">
                 <?php
                 settings_fields('hoa_galaxy_settings');
+                wp_nonce_field('hoa_galaxy_settings_nonce', 'hoa_galaxy_nonce');
                 do_settings_sections('hoa-galaxy-settings');
                 submit_button();
                 ?>
@@ -373,32 +374,47 @@ class HOA_Galaxy_Background {
         );
     }
     
-    public function sanitize_settings($input) {
+    """    public function sanitize_settings($input) {
+        if (!isset($_POST['hoa_galaxy_nonce']) || !wp_verify_nonce($_POST['hoa_galaxy_nonce'], 'hoa_galaxy_settings_nonce')) {
+            wp_die('Invalid nonce specified', 'Error');
+        }
+
         $output = $this->get_default_settings();
         
         foreach ($input as $key => $value) {
             if (isset($output[$key])) {
-                if (in_array($key, ['star_count', 'shooting_count', 'z_index'])) {
-                    $output[$key] = absint($value);
-                } elseif (in_array($key, ['star_size_min', 'star_size_max', 'star_opacity', 'shooting_size'])) {
-                    $output[$key] = floatval($value);
-                } elseif (in_array($key, ['star_colors', 'shooting_colors'])) {
-                    $colors = array_map('trim', explode(',', $value));
-                    $valid_colors = array();
-                    foreach ($colors as $color) {
-                        if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
-                            $valid_colors[] = $color;
+                switch ($key) {
+                    case 'star_count':
+                    case 'shooting_count':
+                    case 'z_index':
+                        $output[$key] = intval($value);
+                        break;
+                    case 'star_size_min':
+                    case 'star_size_max':
+                    case 'star_opacity':
+                    case 'shooting_size':
+                        $output[$key] = floatval($value);
+                        break;
+                    case 'star_colors':
+                    case 'shooting_colors':
+                        $colors = array_map('trim', explode(',', sanitize_text_field($value)));
+                        $valid_colors = array();
+                        foreach ($colors as $color) {
+                            if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
+                                $valid_colors[] = $color;
+                            }
                         }
-                    }
-                    $output[$key] = implode(',', $valid_colors);
-                } elseif ($key === 'disable_on_mobile') {
-                    $output[$key] = (bool) $value;
+                        $output[$key] = implode(',', $valid_colors);
+                        break;
+                    case 'disable_on_mobile':
+                        $output[$key] = (bool) $value;
+                        break;
                 }
             }
         }
         
         return $output;
-    }
+    }""
     
     public function admin_enqueue_scripts($hook) {
         if ('settings_page_hoa-galaxy-settings' !== $hook) {
