@@ -27,7 +27,6 @@ class HOA_Galaxy_Background {
         add_filter('plugin_action_links_' . plugin_basename(HOA_GALAXY_PLUGIN_FILE), [$this, 'add_auto_update_link']);
         add_action('admin_init', [$this, 'handle_auto_update_toggle']);
     }
-    }
 
     private function get_default_settings(): array {
         return [
