@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const galaxy = document.getElementById('galaxy');
     const settings = hoaGalaxySettings;
+
+    // Set background color
+    galaxy.style.backgroundColor = settings.background_color;
     
     // Create stars
     const starFragment = document.createDocumentFragment();

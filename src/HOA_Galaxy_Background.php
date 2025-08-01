@@ -42,6 +42,7 @@ class HOA_Galaxy_Background {
             'disable_on_mobile' => false,
             'admin_theme' => 'system', // New setting for admin theme
             'auto_updates_enabled' => false,
+            'background_color' => '#000000',
         ];
     }
 
@@ -136,6 +137,8 @@ class HOA_Galaxy_Background {
             'z_index' => ['Z-Index', 'number', 'hoa_galaxy_general', ['min' => -999, 'max' => 0, 'step' => 1]],
             'disable_on_mobile' => ['Disable on Mobile', 'checkbox', 'hoa_galaxy_general', []],
             'admin_theme' => ['Admin Panel Theme', 'select', 'hoa_galaxy_general', ['options' => ['system' => 'System Default', 'light' => 'Light Mode', 'dark' => 'Dark Mode']]],
+            'background_color' => ['Background Color', 'text', 'hoa_galaxy_general', ['class' => 'color-field']],
+        ];
         ];
 
         foreach ($fields as $name => $field) {
@@ -230,6 +233,9 @@ class HOA_Galaxy_Background {
                     break;
                 case 'admin_theme':
                     $output[$key] = sanitize_key($value);
+                    break;
+                case 'background_color':
+                    $output[$key] = sanitize_hex_color($value);
                     break;
             }
         }
