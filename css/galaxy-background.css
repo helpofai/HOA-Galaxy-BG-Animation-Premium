@@ -17,11 +17,12 @@
     background: var(--star-color, #fff);
     opacity: var(--opacity, 0.8);
     z-index: 1;
+    box-shadow: 0 0 0px 0px var(--star-color, #fff); /* Initial shadow for twinkling effect */
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: var(--opacity, 0.8); transform: scale(1.2); }
+    0%, 100% { opacity: 0.2; transform: scale(1); box-shadow: 0 0 0px 0px var(--star-color, #fff); }
+    50% { opacity: var(--opacity, 0.8); transform: scale(1.2); box-shadow: 0 0 10px 5px var(--star-color, #fff); }
 }
 
 .shooting-star {
@@ -31,7 +32,7 @@
     background: var(--shooting-color, #fff);
     opacity: 0;
     z-index: 2;
-    box-shadow: 0 0 6px 2px var(--shooting-color, #fff);
+    box-shadow: 0 0 10px 4px var(--shooting-color, #fff); /* Enhanced shadow for shooting stars */
 }
 
 @keyframes shoot {
