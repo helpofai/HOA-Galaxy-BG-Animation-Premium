@@ -20,11 +20,9 @@ class HOA_Galaxy_Background {
         
         add_action('wp_body_open', [$this, 'render_galaxy_background']);
         
-        if (is_admin()) {
-            add_action('admin_menu', [$this, 'add_admin_menu']);
-            add_action('admin_init', [$this, 'settings_init']);
-            add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
-        }
+        add_action('admin_menu', [$this, 'add_admin_menu']);
+        add_action('admin_init', [$this, 'settings_init']);
+        add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
     }
 
     private function get_default_settings(): array {

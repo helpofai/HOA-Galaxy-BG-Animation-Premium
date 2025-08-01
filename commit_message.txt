@@ -1,7 +1,5 @@
-refactor: Modernize plugin structure and code
+fix(admin): Remove duplicate admin menu item
 
-- Refactor the plugin to use a modern PHP structure with namespaces and separate class files.
-- Introduce strict typing and type declarations for improved code quality.
-- Separate the view logic from the business logic by moving HTML to template files.
-- Update the main plugin file to load the new structure.
-- Bump the plugin version to 3.0.0.
+- The "Galaxy Background" settings menu was appearing twice in the admin panel.
+- This was caused by a redundant `is_admin()` check in the `HOA_Galaxy_Background` class constructor. The constructor was already being called within an `is_admin()` block in the main plugin file.
+- Removing the unnecessary conditional from the constructor resolves the duplication.
