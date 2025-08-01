@@ -6,6 +6,7 @@ body.hoa-galaxy-admin-theme-light {
     --hoa-galaxy-background-color: #f0f0f0;
     --hoa-galaxy-card-background: #fff;
     --hoa-galaxy-border-color: #ddd;
+    --hoa-galaxy-input-background: #f9f9f9;
 }
 
 body.hoa-galaxy-admin-theme-dark {
@@ -14,6 +15,7 @@ body.hoa-galaxy-admin-theme-dark {
     --hoa-galaxy-background-color: #333;
     --hoa-galaxy-card-background: #444;
     --hoa-galaxy-border-color: #555;
+    --hoa-galaxy-input-background: #555;
 }
 
 /* Apply variables to common elements */
@@ -23,12 +25,27 @@ body.hoa-galaxy-admin-theme-dark {
     background-color: var(--hoa-galaxy-background-color);
 }
 
-body.hoa-galaxy-admin-theme-light .wrap,
-body.hoa-galaxy-admin-theme-dark .wrap {
+body.hoa-galaxy-admin-theme-light .hoa-galaxy-settings-wrap,
+body.hoa-galaxy-admin-theme-dark .hoa-galaxy-settings-wrap {
+    background-color: var(--hoa-galaxy-background-color);
+}
+
+body.hoa-galaxy-admin-theme-light .hoa-galaxy-settings-container,
+body.hoa-galaxy-admin-theme-dark .hoa-galaxy-settings-container {
     background-color: var(--hoa-galaxy-card-background);
     border: 1px solid var(--hoa-galaxy-border-color);
-    padding: 20px;
-    margin-top: 20px;
+}
+
+body.hoa-galaxy-admin-theme-light .hoa-galaxy-card,
+body.hoa-galaxy-admin-theme-dark .hoa-galaxy-card {
+    background-color: var(--hoa-galaxy-card-background);
+    border: 1px solid var(--hoa-galaxy-border-color);
+}
+
+body.hoa-galaxy-admin-theme-light .hoa-galaxy-card-title,
+body.hoa-galaxy-admin-theme-dark .hoa-galaxy-card-title {
+    color: var(--hoa-galaxy-text-color);
+    border-bottom-color: var(--hoa-galaxy-border-color);
 }
 
 body.hoa-galaxy-admin-theme-light .form-table th,
@@ -42,16 +59,21 @@ body.hoa-galaxy-admin-theme-light select,
 body.hoa-galaxy-admin-theme-dark input[type="text"],
 body.hoa-galaxy-admin-theme-dark input[type="number"],
 body.hoa-galaxy-admin-theme-dark select {
-    background-color: var(--hoa-galaxy-card-background);
+    background-color: var(--hoa-galaxy-input-background);
     color: var(--hoa-galaxy-text-color);
-    border: 1px solid var(--hoa-galaxy-border-color);
+    border-color: var(--hoa-galaxy-border-color);
 }
 
 body.hoa-galaxy-admin-theme-light .wp-picker-container input.wp-color-picker,
 body.hoa-galaxy-admin-theme-dark .wp-picker-container input.wp-color-picker {
-    background-color: var(--hoa-galaxy-card-background);
+    background-color: var(--hoa-galaxy-input-background);
     color: var(--hoa-galaxy-text-color);
-    border: 1px solid var(--hoa-galaxy-border-color);
+    border-color: var(--hoa-galaxy-border-color);
+}
+
+body.hoa-galaxy-admin-theme-light p.submit,
+body.hoa-galaxy-admin-theme-dark p.submit {
+    border-top-color: var(--hoa-galaxy-border-color);
 }
 
 /* System Default (no specific styles, relies on WordPress default) */

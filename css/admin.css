@@ -1,8 +1,162 @@
-/* Optional admin styling */
-.wrap .form-table th {
-    width: 250px;
+/* Admin Styling for HOA Galaxy BG Animation Premium */
+
+/* General Layout and Container */
+.hoa-galaxy-settings-wrap {
+    max-width: 960px;
+    margin: 20px auto;
+    background: var(--hoa-galaxy-background-color, #f0f0f0);
+    padding: 0;
+    box-shadow: none;
+    border: none;
 }
 
-.color-field {
-    width: 80px !important;
+.hoa-galaxy-settings-wrap h1 {
+    color: var(--hoa-galaxy-text-color, #333);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.hoa-galaxy-settings-container {
+    background: var(--hoa-galaxy-card-background, #fff);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+/* Card Styling for Sections */
+.hoa-galaxy-card {
+    background: var(--hoa-galaxy-card-background, #fff);
+    border: 1px solid var(--hoa-galaxy-border-color, #ddd);
+    border-radius: 8px;
+    margin-bottom: 25px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.hoa-galaxy-card-title {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--hoa-galaxy-text-color, #333);
+    border-bottom: 1px solid var(--hoa-galaxy-border-color, #eee);
+    padding-bottom: 15px;
+}
+
+/* Form Table Styling */
+.hoa-galaxy-card .form-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.hoa-galaxy-card .form-table th,
+.hoa-galaxy-card .form-table td {
+    padding: 10px 0;
+    vertical-align: middle;
+    border-bottom: none;
+}
+
+.hoa-galaxy-card .form-table th {
+    width: 30%; /* Adjust as needed */
+    font-weight: 600;
+    color: var(--hoa-galaxy-text-color, #555);
+    padding-right: 20px;
+    text-align: left;
+}
+
+.hoa-galaxy-card .form-table td {
+    width: 70%;
+}
+
+/* Input and Select Field Styling */
+.hoa-galaxy-card input[type="text"],
+.hoa-galaxy-card input[type="number"],
+.hoa-galaxy-card select {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px 12px;
+    border: 1px solid var(--hoa-galaxy-border-color, #ccc);
+    border-radius: 5px;
+    background-color: var(--hoa-galaxy-input-background, #f9f9f9);
+    color: var(--hoa-galaxy-text-color, #333);
+    font-size: 1em;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.hoa-galaxy-card input[type="text"]:focus,
+.hoa-galaxy-card input[type="number"]:focus,
+.hoa-galaxy-card select:focus {
+    border-color: #007cba;
+    box-shadow: 0 0 0 1px #007cba;
+    outline: none;
+}
+
+/* Color Picker Specific Styling */
+.hoa-galaxy-card .color-field {
+    width: 100px !important;
+    max-width: 100px !important;
+    text-align: center;
+}
+
+/* Checkbox Styling */
+.hoa-galaxy-card input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Submit Button Styling */
+p.submit {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--hoa-galaxy-border-color, #eee);
+    margin-top: 30px;
+}
+
+p.submit .button-primary {
+    background: #007cba;
+    border-color: #007cba;
+    box-shadow: 0 2px 5px rgba(0, 124, 186, 0.2);
+    text-shadow: none;
+    padding: 8px 20px;
+    height: auto;
+    line-height: 1.5;
+    font-size: 1.1em;
+    border-radius: 5px;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+p.submit .button-primary:hover,
+p.submit .button-primary:focus {
+    background: #006ba1;
+    border-color: #006ba1;
+    box-shadow: 0 3px 8px rgba(0, 124, 186, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 782px) {
+    .hoa-galaxy-settings-wrap {
+        margin: 10px;
+    }
+
+    .hoa-galaxy-settings-container {
+        padding: 20px;
+    }
+
+    .hoa-galaxy-card {
+        padding: 15px;
+    }
+
+    .hoa-galaxy-card .form-table th,
+    .hoa-galaxy-card .form-table td {
+        display: block;
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    .hoa-galaxy-card .form-table th {
+        padding-bottom: 0;
+    }
 }

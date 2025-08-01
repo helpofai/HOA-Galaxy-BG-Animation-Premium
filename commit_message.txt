@@ -1,3 +1,5 @@
-chore: Update plugin version to 3.0.1
+feat(admin): Implement premium UI for settings page
 
-- Updated the plugin version in `hoa-galaxy-bg-animation.php` to 3.0.1.
+- Restructured `views/settings-page.php` for a more semantic and modular layout.
+- Enhanced `css/admin.css` with modern styling for a premium look and feel, including typography, spacing, shadows, and custom form element styles.
+- Adjusted `css/admin-theme.css` to ensure seamless integration with light and dark modes.
