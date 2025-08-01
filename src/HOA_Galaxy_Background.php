@@ -79,7 +79,10 @@ class HOA_Galaxy_Background {
             return;
         }
         
-        $settings = $this->settings;
+        wp_enqueue_style('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'css/galaxy-background.css', [], HOA_GALAXY_PLUGIN_VERSION);
+        wp_enqueue_script('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'js/galaxy-background.js', [], HOA_GALAXY_PLUGIN_VERSION, true);
+        wp_localize_script('hoa-galaxy-background', 'hoaGalaxySettings', $this->settings);
+
         require_once __DIR__ . '/../views/galaxy-background.php';
     }
 

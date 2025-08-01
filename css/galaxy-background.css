@@ -1,0 +1,63 @@
+.galaxy-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: -webkit-fill-available;
+    background: transparent;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    animation: twinkle 5s infinite ease-in-out;
+    background: var(--star-color, #fff);
+    opacity: var(--opacity, 0.8);
+    z-index: 1;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: var(--opacity, 0.8); transform: scale(1.2); }
+}
+
+.shooting-star {
+    position: absolute;
+    border-radius: 50%;
+    animation: shoot 3s linear infinite;
+    background: var(--shooting-color, #fff);
+    opacity: 0;
+    z-index: 2;
+    box-shadow: 0 0 6px 2px var(--shooting-color, #fff);
+}
+
+@keyframes shoot {
+    0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100vw) translateY(-100vh) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .galaxy-bg {
+        height: 100vh;
+        height: -webkit-fill-available;
+    }
+    .star {
+        animation: twinkle-mobile 5s infinite ease-in-out;
+    }
+    @keyframes twinkle-mobile {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: var(--opacity, 0.6); transform: scale(1.1); }
+    }
+}
