@@ -1,6 +1,3 @@
-feat(admin): Add light/dark mode to admin panel
+chore: Update plugin version to 3.0.1
 
-- Implemented a new "Admin Panel Theme" setting (Light, Dark, System Default).
-- Added logic to apply theme classes to the admin body.
-- Created `css/admin-theme.css` for theme-specific styles.
-- Updated `js/admin.js` to handle dynamic theme switching.
+- Updated the plugin version in `hoa-galaxy-bg-animation.php` to 3.0.1.
