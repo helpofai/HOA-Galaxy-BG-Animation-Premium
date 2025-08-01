@@ -24,6 +24,9 @@ class HOA_Galaxy_Background {
         add_action('admin_init', [$this, 'settings_init']);
         add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
         add_filter('admin_body_class', [$this, 'add_admin_body_class']);
+        add_filter('plugin_action_links_' . plugin_basename(HOA_GALAXY_PLUGIN_FILE), [$this, 'add_auto_update_link']);
+        add_action('admin_init', [$this, 'handle_auto_update_toggle']);
+    }
     }
 
     private function get_default_settings(): array {
@@ -39,7 +42,37 @@ class HOA_Galaxy_Background {
             'z_index' => -100,
             'disable_on_mobile' => false,
             'admin_theme' => 'system', // New setting for admin theme
+            'auto_updates_enabled' => false,
         ];
+    }
+
+    public function add_auto_update_link(array $links): array {
+        $auto_updates_enabled = $this->settings['auto_updates_enabled'] ?? false;
+        $text = $auto_updates_enabled ? __('Disable Auto-updates', 'hoa-galaxy') : __('Enable Auto-updates', 'hoa-galaxy');
+        $action = $auto_updates_enabled ? 'disable_auto_updates' : 'enable_auto_updates';
+        $url = wp_nonce_url(admin_url('admin.php?page=hoa-galaxy-settings&action=' . $action), 'hoa_galaxy_auto_update_nonce');
+        $links[] = '<a href="' . esc_url($url) . '">' . esc_html($text) . '</a>';
+        return $links;
+    }
+
+    public function handle_auto_update_toggle(): void {
+        if (!isset($_GET['action']) || !in_array($_GET['action'], ['enable_auto_updates', 'disable_auto_updates'])) {
+            return;
+        }
+
+        if (!wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'hoa_galaxy_auto_update_nonce')) {
+            wp_die(__('Invalid nonce specified', 'hoa-galaxy'), __('Error', 'hoa-galaxy'));
+        }
+
+        if (!current_user_can('manage_options')) {
+            wp_die(__('You do not have sufficient permissions to access this page.', 'hoa-galaxy'), __('Error', 'hoa-galaxy'));
+        }
+
+        $this->settings['auto_updates_enabled'] = ('enable_auto_updates' === $_GET['action']);
+        update_option('hoa_galaxy_settings', $this->settings);
+
+        wp_redirect(admin_url('plugins.php'));
+        exit;
     }
 
     public function render_galaxy_background(): void {

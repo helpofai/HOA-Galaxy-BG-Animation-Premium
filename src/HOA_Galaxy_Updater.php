@@ -13,10 +13,12 @@ class HOA_Galaxy_Updater {
     private string $repository;
     private ?string $authorize_token = null;
     private ?array $github_response = null;
+    private array $settings;
 
     public function __construct(string $file) {
         $this->file = $file;
         $this->set_plugin_properties();
+        $this->settings = get_option('hoa_galaxy_settings', []);
     }
 
     public function set_plugin_properties(): void {
@@ -76,6 +78,12 @@ class HOA_Galaxy_Updater {
 
     public function modify_transient($transient) {
         $this->set_plugin_properties(); // Ensure properties are set
+        
+        // Only proceed if auto-updates are enabled
+        if (!($this->settings['auto_updates_enabled'] ?? false)) {
+            return $transient;
+        }
+
         if (property_exists($transient, 'checked') && $transient->checked) {
             $this->get_repository_info();
 

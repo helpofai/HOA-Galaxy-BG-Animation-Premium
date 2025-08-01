@@ -13,6 +13,8 @@
 
 defined('ABSPATH') or die('Direct script access disallowed.');
 
+define('HOA_GALAXY_PLUGIN_FILE', __FILE__);
+
 require_once __DIR__ . '/src/HOA_Galaxy_Background.php';
 require_once __DIR__ . '/src/HOA_Galaxy_Updater.php';
 
