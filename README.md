@@ -21,7 +21,17 @@ A premium WordPress plugin for creating a stunning, animated galaxy background o
 
 ## Changelog
 
-### 2.0.3
-* Added nonce for security
-* Improved sanitization 
-* Readme updated
+### Version 3.0.1 - Enhancements and Bug Fixes
+
+This update brings new features and addresses a critical bug in the admin panel.
+
+*   **Admin Panel Theme (Light/Dark Mode):** You can now customize the appearance of the Galaxy Background settings page in your WordPress admin. Choose between "Light Mode," "Dark Mode," or "System Default" to match your preferences.
+*   **Duplicate Admin Menu Item Fix:** Resolved an issue where the "Galaxy Background" settings menu appeared twice in the WordPress admin panel.
+*   **Modernized Codebase:** Refactored the plugin to use a modern PHP structure with namespaces, strict typing, and separate class files for improved code quality and maintainability.
+*   **Premium UI for Settings Page:** Overhauled the admin settings page with a modern, visually appealing design, including improved layout, typography, and form element styling.
+
+### Version 2.0.3 - Initial Release & Security Improvements
+
+*   Added nonce for security to the admin settings form.
+*   Improved input sanitization for all settings fields.
+*   Initial release of the plugin with core galaxy background animation features.

@@ -1,5 +1,4 @@
-feat(admin): Implement premium UI for settings page
+docs: Update README with comprehensive changelog
 
-- Restructured `views/settings-page.php` for a more semantic and modular layout.
-- Enhanced `css/admin.css` with modern styling for a premium look and feel, including typography, spacing, shadows, and custom form element styles.
-- Adjusted `css/admin-theme.css` to ensure seamless integration with light and dark modes.
+- Added detailed changelog entries for versions 3.0.1 and 2.0.3.
+- Included information about new features, bug fixes, and code improvements.
