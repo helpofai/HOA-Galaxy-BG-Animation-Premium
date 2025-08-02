@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HOA Galaxy BG Animation Premium
  * Description: Premium animated galaxy background with transparent background for better visibility
- * Version: 3.0.6
+ * Version: 4.0.1
  * Author: Rajib Adhikary
  * Author URI: https://helpofai.com/
  * Plugin URI: https://helpofai.com/plugin/hoa-galaxy-bg-animation-premium
