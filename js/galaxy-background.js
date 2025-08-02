@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const x = Math.random() * 100;
         const y = Math.random() * 100;
         const size = Math.random() * (settings.star_size_max - settings.star_size_min) + settings.star_size_min;
-        const colors = settings.star_colors.split(',');
+        const colors = settings.star_colors;
         const color = colors[Math.floor(Math.random() * colors.length)];
         const delay = Math.random() * 5;
         
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const x = Math.random() * 100;
         const y = Math.random() * 100;
-        const colors = settings.shooting_colors.split(',');
+        const colors = settings.shooting_colors;
         const color = colors[Math.floor(Math.random() * colors.length)];
         const delay = Math.random() * 15;
         const duration = Math.random() * 2 + 1;

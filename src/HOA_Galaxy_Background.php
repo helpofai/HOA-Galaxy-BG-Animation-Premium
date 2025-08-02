@@ -37,7 +37,7 @@ class HOA_Galaxy_Background {
             'star_opacity' => 0.8,
             'shooting_count' => 10,
             'shooting_size' => 2,
-            'shooting_colors' => ['#ffffff','#64f0ff','#ff5e5e'],
+            'shooting_colors' => ['#ffffff','#64f0ff','#ff5e5e','#FFFF00','#00FF00','#0000FF'],
             'z_index' => -100,
             'disable_on_mobile' => false,
             'admin_theme' => 'system', // New setting for admin theme
@@ -81,7 +81,7 @@ class HOA_Galaxy_Background {
         }
         
         wp_enqueue_style('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'css/galaxy-background.css', [], HOA_GALAXY_PLUGIN_VERSION);
-        wp_enqueue_script('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'js/galaxy-background.js', [], '3.0.6', true);
+        wp_enqueue_script('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'js/galaxy-background.js', [], '4.0.1', true);
         wp_localize_script('hoa-galaxy-background', 'hoaGalaxySettings', $this->settings);
 
         require_once __DIR__ . '/../views/galaxy-background.php';
