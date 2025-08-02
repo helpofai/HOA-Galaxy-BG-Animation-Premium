@@ -19,7 +19,7 @@ jQuery(document).ready(function($) {
             </div>
         `;
         $(this).before(newItem);
-        initializeColorPickers(); // Initialize color picker for the new field
+        container.find('.hoa-galaxy-color-item').last().find('.color-field').wpColorPicker(); // Initialize color picker for the new field
     });
 
     // Handle removing color fields
