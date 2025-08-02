@@ -139,7 +139,6 @@ class HOA_Galaxy_Background {
             'admin_theme' => ['Admin Panel Theme', 'select', 'hoa_galaxy_general', ['options' => ['system' => 'System Default', 'light' => 'Light Mode', 'dark' => 'Dark Mode']]],
             'background_color' => ['Background Color', 'text', 'hoa_galaxy_general', ['class' => 'color-field']],
         ];
-        ];
 
         foreach ($fields as $name => $field) {
             add_settings_field(
