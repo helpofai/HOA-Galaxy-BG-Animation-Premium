@@ -1,3 +1,16 @@
+## Version 4.0.1 - Feature Enhancements and Bug Fixes
+
+This update introduces new customization options and resolves previous issues.
+
+### New Features:
+
+*   **Expanded Shooting Star Colors:** Added more default color options for shooting stars, providing greater visual variety.
+
+### Bug Fixes:
+
+*   **"Add Color" Button Functionality:** Fixed an issue where the "Add Color" button in the Galaxy Background Settings was not working correctly.
+*   **Star Shadow Removal:** Removed the box-shadow effect from stars and shooting stars for a cleaner visual appearance.
+
 ## Version 3.0.1 - Enhancements and Bug Fixes
 
 This update brings new features and addresses a critical bug in the admin panel.
