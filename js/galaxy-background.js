@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log(hoaGalaxySettings);
     const galaxy = document.getElementById('galaxy');
     const settings = hoaGalaxySettings;
 
