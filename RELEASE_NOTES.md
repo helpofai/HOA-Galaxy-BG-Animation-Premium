@@ -1,3 +1,20 @@
+## Version 4.1.0 - Enhanced Control and Extensibility
+
+This update introduces significant new features, providing greater control over the plugin's appearance and behavior.
+
+### New Features:
+
+*   **Display Controls**: You can now choose where the galaxy background is displayed. Options include:
+    *   Everywhere
+    *   Homepage only
+    *   Specific pages/posts
+*   **Advanced Background Color Controls**: The background color settings have been enhanced to support both solid colors and gradients. You can now select two colors and a gradient direction for the background.
+*   **Improved Extensibility**: The `HOA_Galaxy_Background` class has been made more extensible by making its methods public, allowing for easier customization by developers.
+
+### Bug Fixes:
+
+*   **Fatal Error on Activation**: Fixed a fatal error that occurred when activating the plugin due to a syntax error.
+
 ## Version 4.0.1 - Feature Enhancements and Bug Fixes
 
 This update introduces new customization options and resolves previous issues.
