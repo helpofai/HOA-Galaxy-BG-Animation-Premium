@@ -80,7 +80,7 @@ class HOA_Galaxy_Background {
         exit;
     }
 
-    """    public function render_galaxy_background(): void {
+    public function render_galaxy_background(): void {
         $display_on = $this->settings['display_on'] ?? 'everywhere';
         $display_on_pages = $this->settings['display_on_pages'] ?? '';
 
@@ -105,7 +105,7 @@ class HOA_Galaxy_Background {
         wp_localize_script('hoa-galaxy-background', 'hoaGalaxySettings', $this->settings);
 
         require_once __DIR__ . '/../views/galaxy-background.php';
-    }""
+    }
 
     public function add_admin_menu(): void {
         add_options_page(
