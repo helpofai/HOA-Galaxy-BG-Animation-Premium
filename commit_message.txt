@@ -1,3 +1,4 @@
-Chore: Update version to 4.0.2
+chore: Update version to 4.1.0
 
-Updated plugin version to 4.0.2 in hoa-galaxy-bg-animation.php and src/HOA_Galaxy_Background.php.
+- Updated plugin version to 4.1.0 in all relevant files.
+- Updated RELEASE_NOTES.md with the latest changes.
