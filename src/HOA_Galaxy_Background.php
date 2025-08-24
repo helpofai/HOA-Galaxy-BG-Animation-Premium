@@ -15,7 +15,7 @@ class HOA_Galaxy_Background {
         return self::$instance;
     }
 
-    private function __construct() {
+    public function __construct() {
         $this->settings = get_option('hoa_galaxy_settings', $this->get_default_settings());
         
         add_action('wp_body_open', [$this, 'render_galaxy_background']);
@@ -28,7 +28,7 @@ class HOA_Galaxy_Background {
         add_action('admin_init', [$this, 'handle_auto_update_toggle']);
     }
 
-    private function get_default_settings(): array {
+    public function get_default_settings(): array {
         return [
             'star_count' => 150,
             'star_size_min' => 1,
@@ -42,7 +42,12 @@ class HOA_Galaxy_Background {
             'disable_on_mobile' => false,
             'admin_theme' => 'system', // New setting for admin theme
             'auto_updates_enabled' => false,
-            'background_color' => '#000000',
+            'background_type' => 'solid',
+            'background_color_1' => '#000000',
+            'background_color_2' => '#000000',
+            'background_gradient_direction' => 'to right',
+            'display_on' => 'everywhere',
+            'display_on_pages' => '',
         ];
     }
 
@@ -75,17 +80,32 @@ class HOA_Galaxy_Background {
         exit;
     }
 
-    public function render_galaxy_background(): void {
+    """    public function render_galaxy_background(): void {
+        $display_on = $this->settings['display_on'] ?? 'everywhere';
+        $display_on_pages = $this->settings['display_on_pages'] ?? '';
+
+        if ($display_on === 'homepage' && !is_front_page()) {
+            return;
+        }
+
+        if ($display_on === 'specific_pages') {
+            $allowed_pages = array_map('trim', explode(',', $display_on_pages));
+            $current_page_id = get_queried_object_id();
+            if (!in_array($current_page_id, $allowed_pages)) {
+                return;
+            }
+        }
+
         if (wp_is_mobile() && $this->settings['disable_on_mobile']) {
             return;
         }
         
         wp_enqueue_style('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'css/galaxy-background.css', [], HOA_GALAXY_PLUGIN_VERSION);
-        wp_enqueue_script('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'js/galaxy-background.js', [], '4.0.1', true);
+        wp_enqueue_script('hoa-galaxy-background', plugin_dir_url(__DIR__) . 'js/galaxy-background.js', [], '4.0.2', true);
         wp_localize_script('hoa-galaxy-background', 'hoaGalaxySettings', $this->settings);
 
         require_once __DIR__ . '/../views/galaxy-background.php';
-    }
+    }""
 
     public function add_admin_menu(): void {
         add_options_page(
@@ -137,7 +157,12 @@ class HOA_Galaxy_Background {
             'z_index' => ['Z-Index', 'number', 'hoa_galaxy_general', ['min' => -999, 'max' => 0, 'step' => 1]],
             'disable_on_mobile' => ['Disable on Mobile', 'checkbox', 'hoa_galaxy_general', []],
             'admin_theme' => ['Admin Panel Theme', 'select', 'hoa_galaxy_general', ['options' => ['system' => 'System Default', 'light' => 'Light Mode', 'dark' => 'Dark Mode']]],
-            'background_color' => ['Background Color', 'text', 'hoa_galaxy_general', ['class' => 'color-field']],
+            'background_type' => ['Background Type', 'select', 'hoa_galaxy_general', ['options' => ['solid' => 'Solid', 'gradient' => 'Gradient']]],
+            'background_color_1' => ['Background Color 1', 'text', 'hoa_galaxy_general', ['class' => 'color-field']],
+            'background_color_2' => ['Background Color 2', 'text', 'hoa_galaxy_general', ['class' => 'color-field']],
+            'background_gradient_direction' => ['Gradient Direction', 'text', 'hoa_galaxy_general', []],
+            'display_on' => ['Display On', 'select', 'hoa_galaxy_general', ['options' => ['everywhere' => 'Everywhere', 'homepage' => 'Homepage Only', 'specific_pages' => 'Specific Pages/Posts']]],
+            'display_on_pages' => ['Display on Pages/Posts', 'text', 'hoa_galaxy_general', []],
         ];
 
         foreach ($fields as $name => $field) {
@@ -263,8 +288,21 @@ class HOA_Galaxy_Background {
                 case 'admin_theme':
                     $output[$key] = sanitize_key($value);
                     break;
-                case 'background_color':
+                case 'background_type':
+                    $output[$key] = sanitize_key($value);
+                    break;
+                case 'background_color_1':
+                case 'background_color_2':
                     $output[$key] = sanitize_hex_color($value);
+                    break;
+                case 'background_gradient_direction':
+                    $output[$key] = sanitize_text_field($value);
+                    break;
+                case 'display_on':
+                    $output[$key] = sanitize_key($value);
+                    break;
+                case 'display_on_pages':
+                    $output[$key] = sanitize_text_field($value);
                     break;
             }
         }

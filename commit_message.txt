@@ -1,1 +1,3 @@
-fix: Parse error in HOA_Galaxy_Background.php
+Chore: Update version to 4.0.2
+
+Updated plugin version to 4.0.2 in hoa-galaxy-bg-animation.php and src/HOA_Galaxy_Background.php.

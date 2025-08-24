@@ -40,4 +40,43 @@ jQuery(document).ready(function($) {
         // Add new theme class
         body.addClass('hoa-galaxy-admin-theme-' + selectedTheme);
     }).trigger('change'); // Trigger on load to apply initial theme
+
+    // Show/hide the display_on_pages field based on the display_on field
+    const displayOnField = $('select[name="hoa_galaxy_settings[display_on]"]');
+    const displayOnPagesField = $('input[name="hoa_galaxy_settings[display_on_pages]"]').closest('tr');
+
+    function toggleDisplayOnPagesField() {
+        if (displayOnField.val() === 'specific_pages') {
+            displayOnPagesField.show();
+        } else {
+            displayOnPagesField.hide();
+        }
+    }
+
+    // Initial check
+    toggleDisplayOnPagesField();
+
+    // Check on change
+    displayOnField.on('change', toggleDisplayOnPagesField);
+
+    // Show/hide the gradient fields based on the background_type field
+    const backgroundTypeField = $('select[name="hoa_galaxy_settings[background_type]"]');
+    const backgroundColor2Field = $('input[name="hoa_galaxy_settings[background_color_2]"]').closest('tr');
+    const gradientDirectionField = $('input[name="hoa_galaxy_settings[background_gradient_direction]"]').closest('tr');
+
+    function toggleGradientFields() {
+        if (backgroundTypeField.val() === 'gradient') {
+            backgroundColor2Field.show();
+            gradientDirectionField.show();
+        } else {
+            backgroundColor2Field.hide();
+            gradientDirectionField.hide();
+        }
+    }
+
+    // Initial check
+    toggleGradientFields();
+
+    // Check on change
+    backgroundTypeField.on('change', toggleGradientFields);
 });

@@ -2,8 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const galaxy = document.getElementById('galaxy');
     const settings = hoaGalaxySettings;
 
-    // Set background color
-    galaxy.style.backgroundColor = settings.background_color;
+    // Set background
+    if (settings.background_type === 'gradient') {
+        galaxy.style.backgroundImage = `linear-gradient(${settings.background_gradient_direction}, ${settings.background_color_1}, ${settings.background_color_2})`;
+    } else {
+        galaxy.style.backgroundColor = settings.background_color_1;
+    }
     
     // Create stars
     const starFragment = document.createDocumentFragment();
